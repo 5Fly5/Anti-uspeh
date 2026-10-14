@@ -1,0 +1,820 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Ant Academy | Главная</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #fff;
+            color: #1A1A1A;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        :root {
+            --red: #E63946;
+            --red-dark: #C92A36;
+            --black: #1A1A1A;
+            --gray: #4A4A4A;
+            --light: #F4F4F4;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid var(--red);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+
+            .btn:hover {
+                background: var(--red-dark);
+                border-color: var(--red-dark);
+                transform: translateY(-2px);
+            }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border-color: var(--black);
+        }
+
+            .btn-outline:hover {
+                background: var(--black);
+                color: #fff;
+            }
+
+        .btn-disco {
+            background: linear-gradient(45deg, red, orange, yellow, lime, cyan, blue, violet);
+            background-size: 400% 400%;
+            animation: grad 2s infinite;
+            border: none !important;
+            color: #fff !important;
+        }
+
+        @keyframes grad {
+            0%,100% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .logo-ant {
+            font-size: 2rem;
+            animation: bounce 0.6s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%,100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+            .nav-links a {
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+            }
+
+                .nav-links a:hover {
+                    color: var(--red);
+                }
+
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+        }
+
+            .hero h1 {
+                font-size: 3rem;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                color: var(--gray);
+                max-width: 600px;
+                margin: 0 auto 30px;
+            }
+
+            .hero .text-red {
+                color: var(--red);
+            }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .formula {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .f-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .f-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .f-e {
+            background: var(--red);
+        }
+
+        .f-f {
+            background: var(--black);
+        }
+
+        .f-s {
+            background: #777;
+        }
+
+        .f-sign {
+            font-size: 2.5rem;
+            color: #ddd;
+        }
+
+        .f-result {
+            background: var(--light);
+            border: 2px dashed var(--black);
+            padding: 25px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+            .f-result h3 {
+                color: var(--red);
+                font-size: 1.5rem;
+                margin: 0;
+            }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 35px 25px;
+            border-radius: 4px;
+            border-bottom: 4px solid transparent;
+            transition: 0.3s;
+        }
+
+            .card:hover {
+                border-bottom-color: var(--red);
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            }
+
+            .card h3 {
+                font-size: 1.3rem;
+                margin: 15px 0;
+            }
+
+            .card p {
+                color: var(--gray);
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+        .card-link {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--black);
+        }
+
+            .card-link:hover {
+                color: var(--red);
+            }
+
+        .cta {
+            background: var(--black);
+            color: #fff;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 650px;
+            margin: 0 auto;
+            border: 2px solid var(--red);
+            padding: 40px 30px;
+        }
+
+        .cta h2 {
+            color: #fff;
+        }
+
+        .cta p {
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-input {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 2px;
+            width: 250px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+            .cta-input:focus {
+                outline: 2px solid var(--red);
+            }
+
+        footer {
+            background: #111;
+            color: #777;
+            padding: 40px 0 25px;
+            font-size: 0.9rem;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .f-col h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .f-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .f-col a:hover {
+            color: var(--red);
+        }
+
+        .f-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Disco */
+        .disco-shake {
+            animation: shake 0.4s infinite;
+        }
+
+        @keyframes shake {
+            0%,100% {
+                transform: translateX(0)
+            }
+
+            25% {
+                transform: translateX(-8px)
+            }
+
+            75% {
+                transform: translateX(8px)
+            }
+        }
+
+        .disco-rainbow {
+            animation: rainbow 0.5s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+                filter: hue-rotate(0deg)
+            }
+
+            100% {
+                filter: hue-rotate(360deg)
+            }
+        }
+
+        .disco-flash {
+            animation: flash 0.25s infinite;
+        }
+
+        @keyframes flash {
+            0%,100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.75
+            }
+        }
+
+        .disco-ant {
+            position: fixed;
+            font-size: 1.8rem;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fly 2.5s linear forwards;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0,0) rotate(0deg);
+                opacity: 1
+            }
+
+            100% {
+                transform: translate(var(--tx),var(--ty)) rotate(var(--r));
+                opacity: 0
+            }
+        }
+
+        .disco-ball {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 4rem;
+            z-index: 9998;
+            animation: spin 1.5s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: translate(-50%,-50%) rotate(360deg)
+            }
+        }
+
+        .note {
+            position: fixed;
+            font-size: 1.8rem;
+            z-index: 9997;
+            pointer-events: none;
+            animation: float 1.8s ease-out forwards;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-150px) rotate(360deg);
+                opacity: 0
+            }
+        }
+
+        .stop-disco {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+            .stop-disco:hover {
+                background: var(--red-dark);
+            }
+
+        /* Ползающий муравей */
+        .crawl-ant {
+            position: fixed;
+            font-size: 2rem;
+            z-index: 9995;
+            pointer-events: none;
+            transition: transform 0.1s linear;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+        }
+
+            .crawl-ant.hidden {
+                display: none !important;
+            }
+
+        .ant-toggle {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            background: #fff;
+            color: var(--black);
+            border: 2px solid var(--red);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+            .ant-toggle:hover {
+                background: var(--red);
+                color: #fff;
+            }
+
+            .ant-toggle.active {
+                background: var(--red);
+                color: #fff;
+            }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s;
+        }
+
+            .fade.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .formula {
+                flex-direction: column;
+            }
+
+            .f-sign {
+                display: none;
+            }
+
+            .cta-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-input {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .f-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .ant-toggle {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrap">
+            <a href="index.html" class="logo">
+                <span class="logo-ant">🐜</span>
+                <span>Red Ant Academy</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#formula">Метод</a></li>
+                    <li><a href="index.html#directions">Направления</a></li>
+                    <li><a href="courses.html">Курсы</a></li>
+                    <li><a href="games.html">Игры</a></li>
+                    <li><a href="index.html#contact">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="courses.html" class="btn">Каталог</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade">Перестань <span class="text-red">тащить</span>.<br>Начни <span class="text-red">строить</span>.</h1>
+            <p class="fade">Академия личной эффективности. Превратите хаос в систему, а усталость — в энергию.</p>
+            <div class="fade">
+                <a href="courses.html" class="btn">Выбрать программу</a>
+                <a href="#formula" class="btn btn-outline">Узнать метод</a>
+                <button class="btn btn-disco" onclick="disco()">🎉 ДИСКОТЕКА 🎉</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="formula">
+        <div class="container">
+            <h2 class="fade">Формула Эффективности</h2>
+            <p class="subtitle fade">Успех — это система, где каждый элемент усиливает другой.</p>
+            <div class="formula fade">
+                <div class="f-item"><div class="f-icon f-e">E</div><h3>Энергия</h3><p style="color:#666;font-size:0.9rem;margin-top:8px">Ваше топливо. Без ресурса планы останутся на бумаге.</p></div>
+                <div class="f-sign">×</div>
+                <div class="f-item"><div class="f-icon f-f">F</div><h3>Фокус</h3><p style="color:#666;font-size:0.9rem;margin-top:8px">Концентрация на главном в эпоху цифрового шума.</p></div>
+                <div class="f-sign">×</div>
+                <div class="f-item"><div class="f-icon f-s">S</div><h3>Система</h3><p style="color:#666;font-size:0.9rem;margin-top:8px">Привычки, которые работают автоматически.</p></div>
+                <div class="f-sign">=</div>
+                <div class="f-result"><h3>Результат</h3><p style="color:#666;font-size:0.9rem;margin-top:8px">Цели без выгорания</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="directions" style="background:var(--light)">
+        <div class="container">
+            <h2 class="fade">4 Направления</h2>
+            <p class="subtitle fade">Выберите то, что нужно вам прямо сейчас.</p>
+            <div class="grid">
+                <div class="card fade"><div style="font-size:2.5rem">⏱️</div><h3>Время и Действие</h3><p>Борьба с прокрастинацией. Техники старта и декомпозиция задач.</p><a href="courses.html" class="card-link">Программы →</a></div>
+                <div class="card fade"><div style="font-size:2.5rem">⚡</div><h3>Энергия</h3><p>Управление био-ритмами. Работайте меньше, успевайте больше.</p><a href="courses.html" class="card-link">Программы →</a></div>
+                <div class="card fade"><div style="font-size:2.5rem">🎯</div><h3>Фокус</h3><p>Цифровая детоксикация. Возвращение внимания в эпоху уведомлений.</p><a href="courses.html" class="card-link">Программы →</a></div>
+                <div class="card fade"><div style="font-size:2.5rem">👑</div><h3>Лидерство</h3><p>Управление командой. Делегирование и система без вас.</p><a href="courses.html" class="card-link">Программы →</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="cta-box fade">
+                <h2>Чек-лист «Цифровая Гигиена»</h2>
+                <p>7 шагов, чтобы освободить 2 часа в день от телефона. Бесплатно.</p>
+                <form class="cta-form" onsubmit="event.preventDefault(); alert('Спасибо! Чек-лист отправлен.');">
+                    <input type="email" class="cta-input" placeholder="Ваш Email" required>
+                    <button type="submit" class="btn">Получить</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="f-grid">
+                <div class="f-col">
+                    <div class="logo" style="color:#fff;margin-bottom:15px"><span class="logo-ant">🐜</span> Red Ant</div>
+                    <p>Академия личной эффективности.<br>Строим будущее по кирпичику.</p>
+                </div>
+                <div class="f-col"><h4>Обучение</h4><ul><li><a href="courses.html">Все курсы</a></li><li><a href="#">Для бизнеса</a></li><li><a href="#">Корпоративным</a></li></ul></div>
+                <div class="f-col"><h4>Развлечения</h4><ul><li><a href="games.html">Игры</a></li><li><a href="games.html#game-ttt">Крестики-нолики</a></li><li><a href="games.html#game-mc">Minecraft</a></li></ul></div>
+                <div class="f-col"><h4>Компания</h4><ul><li><a href="#">О нас</a></li><li><a href="#">Блог</a></li><li><a href="index.html#contact">Контакты</a></li></ul></div>
+                <div class="f-col"><h4>Контакты</h4><ul><li>hello@redant.academy</li><li>+7 (999) 000-00-00</li><li>Москва, ул. Трудолюбия, 1</li></ul></div>
+            </div>
+            <div class="f-bottom">
+                <p>&copy; 2026 Red Ant Academy</p>
+                <div style="display:flex;gap:15px"><a href="#">Конфиденциальность</a><a href="#">Оферта</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка остановки дискотеки -->
+    <button class="stop-disco" id="stopD" onclick="stopDisco()">🛑 Стоп Дискотека</button>
+
+    <!-- Переключатель ползающего муравья -->
+    <button class="ant-toggle" id="antToggle" onclick="toggleCrawlAnt()">
+        <span>🐜</span>
+        <span id="antToggleText">Муравей: ВКЛ</span>
+    </button>
+
+    <!-- Ползающий муравей -->
+    <div class="crawl-ant hidden" id="crawlAnt">🐜</div>
+
+    <audio id="discoAudio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <script>
+        const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('show')), { threshold: .1 });
+        document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.onclick = e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth' }); };
+        });
+
+        // ==================== ДИСКОТЕКА ====================
+        let dInt, nInt, isD = false;
+        function disco() { if (isD) return; isD = true; document.body.classList.add('disco-shake', 'disco-rainbow', 'disco-flash'); document.getElementById('stopD').style.display = 'block'; const a = document.getElementById('discoAudio'); a.volume = 0.3; a.play().catch(() => { }); const b = document.createElement('div'); b.className = 'disco-ball'; b.textContent = '🪩'; b.id = 'dBall'; document.body.appendChild(b); dInt = setInterval(ant, 100); nInt = setInterval(note, 300); }
+        function stopDisco() { if (!isD) return; isD = false; document.body.classList.remove('disco-shake', 'disco-rainbow', 'disco-flash'); document.getElementById('stopD').style.display = 'none'; const a = document.getElementById('discoAudio'); a.pause(); a.currentTime = 0; const b = document.getElementById('dBall'); if (b) b.remove(); clearInterval(dInt); clearInterval(nInt); document.querySelectorAll('.disco-ant,.note').forEach(e => e.remove()); }
+        function ant() { const e = document.createElement('div'); e.className = 'disco-ant'; e.textContent = '🐜'; const sx = Math.random() * innerWidth, sy = Math.random() * innerHeight, tx = (Math.random() - .5) * 600, ty = (Math.random() - .5) * 400, r = (Math.random() - .5) * 720; e.style.left = sx + 'px'; e.style.top = sy + 'px'; e.style.setProperty('--tx', tx + 'px'); e.style.setProperty('--ty', ty + 'px'); e.style.setProperty('--r', r + 'deg'); e.style.fontSize = (1 + Math.random()) + 'rem'; document.body.appendChild(e); setTimeout(() => e.remove(), 2500); }
+        function note() { const n = ['🎵', '🎶', '🎼', '🎹', '🎸'], e = document.createElement('div'); e.className = 'note'; e.textContent = n[Math.floor(Math.random() * n.length)]; e.style.left = Math.random() * innerWidth + 'px'; e.style.bottom = '70px'; document.body.appendChild(e); setTimeout(() => e.remove(), 1800); }
+
+        // ==================== ПОЛЗАЮЩИЙ МУРАВЕЙ ====================
+        let crawlAntEnabled = localStorage.getItem('crawlAntEnabled') !== 'false'; // По умолчанию включён
+        let crawlAntInterval = null;
+        const crawlAnt = document.getElementById('crawlAnt');
+        const antToggle = document.getElementById('antToggle');
+        const antToggleText = document.getElementById('antToggleText');
+
+        // Обновление состояния кнопки
+        function updateToggleBtn() {
+            if (crawlAntEnabled) {
+                antToggle.classList.add('active');
+                antToggleText.textContent = 'Муравей: ВКЛ';
+                crawlAnt.classList.remove('hidden');
+                startCrawlAnt();
+            } else {
+                antToggle.classList.remove('active');
+                antToggleText.textContent = 'Муравей: ВЫКЛ';
+                crawlAnt.classList.add('hidden');
+                stopCrawlAnt();
+            }
+        }
+
+        // Переключатель
+        function toggleCrawlAnt() {
+            crawlAntEnabled = !crawlAntEnabled;
+            localStorage.setItem('crawlAntEnabled', crawlAntEnabled);
+            updateToggleBtn();
+        }
+
+        // Запуск ползающего муравья
+        function startCrawlAnt() {
+            if (crawlAntInterval) clearInterval(crawlAntInterval);
+
+            // Начальная позиция
+            let x = Math.random() * (window.innerWidth - 50);
+            let y = Math.random() * (window.innerHeight - 50);
+            let targetX = x;
+            let targetY = y;
+            let speed = 2 + Math.random() * 2;
+            let direction = 1; // 1 = вправо, -1 = влево
+
+            crawlAnt.style.left = x + 'px';
+            crawlAnt.style.top = y + 'px';
+            crawlAnt.style.transform = 'scaleX(' + direction + ')';
+
+            crawlAntInterval = setInterval(() => {
+                // Новая случайная цель каждые 2-4 секунды
+                if (Math.random() < 0.02) {
+                    targetX = Math.random() * (window.innerWidth - 50);
+                    targetY = Math.random() * (window.innerHeight - 50);
+                }
+
+                // Движение к цели
+                const dx = targetX - x;
+                const dy = targetY - y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist > 5) {
+                    x += (dx / dist) * speed;
+                    y += (dy / dist) * speed;
+
+                    // Поворот муравья по направлению движения
+                    if (dx > 0) {
+                        crawlAnt.style.transform = 'scaleX(1)';
+                    } else {
+                        crawlAnt.style.transform = 'scaleX(-1)';
+                    }
+
+                    crawlAnt.style.left = x + 'px';
+                    crawlAnt.style.top = y + 'px';
+                }
+
+                // Анимация "шагов" (лёгкое покачивание)
+                const walkCycle = Math.sin(Date.now() / 100) * 3;
+                crawlAnt.style.transform += ` translateY(${walkCycle}px)`;
+
+            }, 16); // ~60 FPS
+        }
+
+        // Остановка ползающего муравья
+        function stopCrawlAnt() {
+            if (crawlAntInterval) {
+                clearInterval(crawlAntInterval);
+                crawlAntInterval = null;
+            }
+        }
+
+        // Инициализация при загрузке
+        updateToggleBtn();
+
+        // Перезапуск при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (crawlAntEnabled) {
+                stopCrawlAnt();
+                startCrawlAnt();
+            }
+        });
+    </script>
+</body>
+</html>

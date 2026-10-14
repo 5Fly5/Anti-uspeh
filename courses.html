@@ -1,0 +1,538 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antи-успех | Каталог курсов</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #fff;
+            color: #1A1A1A;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        :root {
+            --red: #E63946;
+            --red-dark: #C92A36;
+            --black: #1A1A1A;
+            --gray: #4A4A4A;
+            --light: #F4F4F4;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid var(--red);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+
+            .btn:hover {
+                background: var(--red-dark);
+                border-color: var(--red-dark);
+                transform: translateY(-2px);
+            }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border-color: var(--black);
+        }
+
+            .btn-outline:hover {
+                background: var(--black);
+                color: #fff;
+            }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .logo-ant {
+            font-size: 2rem;
+            animation: bounce 0.6s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%,100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+            .nav-links a {
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+            }
+
+                .nav-links a:hover {
+                    color: var(--red);
+                }
+
+        .page-header {
+            padding: 140px 0 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+        }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+                color: var(--gray);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--light);
+            border-radius: 30px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+            .filter-btn:hover, .filter-btn.active {
+                background: var(--red);
+                color: #fff;
+                border-color: var(--red);
+            }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .course-card {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+            .course-card:hover {
+                border-color: var(--red);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+                transform: translateY(-3px);
+            }
+
+        .course-head {
+            height: 150px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .course-head::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                opacity: 0.08;
+                background: repeating-linear-gradient(45deg, var(--black) 0, var(--black) 1px, transparent 0, transparent 10px);
+            }
+
+        .course-body {
+            padding: 25px;
+        }
+
+        .course-tag {
+            display: inline-block;
+            background: var(--black);
+            color: #fff;
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .course-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .course-price {
+            font-weight: 700;
+            color: var(--red);
+            font-size: 1.1rem;
+        }
+
+        .course-btn {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--black);
+        }
+
+            .course-btn:hover {
+                color: var(--red);
+            }
+
+        .cta {
+            background: var(--light);
+            text-align: center;
+            padding: 60px 0;
+        }
+
+            .cta h3 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .cta p {
+                color: var(--gray);
+                margin-bottom: 25px;
+            }
+
+        footer {
+            background: #111;
+            color: #777;
+            padding: 40px 0 25px;
+            font-size: 0.9rem;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .f-col h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .f-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .f-col a:hover {
+            color: var(--red);
+        }
+
+        .f-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.5s;
+        }
+
+            .fade.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .f-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrap">
+            <a href="index.html" class="logo">
+                <span class="logo-ant">🐜</span>
+                <span>Antи-успех</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#formula">Метод</a></li>
+                    <li><a href="index.html#directions">Направления</a></li>
+                    <li><a href="courses.html" class="active">Курсы</a></li>
+                    <li><a href="index.html#games">Игры</a></li>
+                    <li><a href="index.html#contact">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="courses.html" class="btn">Каталог</a>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="fade">📚 Каталог курсов</h1>
+            <p class="fade">Инвестиции в себя — самая надёжная валюта. Выберите программу для вашего роста.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="filters">
+                <button class="filter-btn active" data-f="all">Все</button>
+                <button class="filter-btn" data-f="time">⏱️ Время</button>
+                <button class="filter-btn" data-f="energy">⚡ Энергия</button>
+                <button class="filter-btn" data-f="focus">🎯 Фокус</button>
+                <button class="filter-btn" data-f="lead">👑 Лидерство</button>
+            </div>
+
+            <div class="course-grid">
+                <!-- Курс 1 -->
+                <div class="course-card fade" data-cat="time">
+                    <div class="course-head">⏳</div>
+                    <div class="course-body">
+                        <span class="course-tag">Хит продаж</span>
+                        <h3 class="course-title">Анти-Прокрастинация: 7 Дней</h3>
+                        <p class="course-desc">Интенсив для тех, кто устал откладывать жизнь на «понедельник». Практика каждый день.</p>
+                        <div class="course-meta">
+                            <span class="course-price">4 900 ₽</span>
+                            <a href="#" class="course-btn" onclick="buy('Анти-Прокрастинация')">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Курс 2 -->
+                <div class="course-card fade" data-cat="energy">
+                    <div class="course-head">⚡</div>
+                    <div class="course-body">
+                        <span class="course-tag">Онлайн</span>
+                        <h3 class="course-title">Биоритмы Продуктивности</h3>
+                        <p class="course-desc">Научный подход к энергии. Узнайте свой хронотип и постройте график под свои пики активности.</p>
+                        <div class="course-meta">
+                            <span class="course-price">3 500 ₽</span>
+                            <a href="#" class="course-btn" onclick="buy('Биоритмы Продуктивности')">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Курс 3 -->
+                <div class="course-card fade" data-cat="lead">
+                    <div class="course-head">👑</div>
+                    <div class="course-body">
+                        <span class="course-tag">Для руководителей</span>
+                        <h3 class="course-title">Лидерство Без Давления</h3>
+                        <p class="course-desc">Как вести команду к результату, сохраняя здоровую атмосферу и собственную энергию.</p>
+                        <div class="course-meta">
+                            <span class="course-price">8 900 ₽</span>
+                            <a href="#" class="course-btn" onclick="buy('Лидерство Без Давления')">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Курс 4 -->
+                <div class="course-card fade" data-cat="focus">
+                    <div class="course-head">🎯</div>
+                    <div class="course-body">
+                        <span class="course-tag">Новинка</span>
+                        <h3 class="course-title">Цифровой Детокс</h3>
+                        <p class="course-desc">Верните себе внимание. Методы освобождения от зависимости от уведомлений и соцсетей.</p>
+                        <div class="course-meta">
+                            <span class="course-price">2 900 ₽</span>
+                            <a href="#" class="course-btn" onclick="buy('Цифровой Детокс')">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Курс 5 -->
+                <div class="course-card fade" data-cat="time">
+                    <div class="course-head">🗓️</div>
+                    <div class="course-body">
+                        <span class="course-tag">Популярный</span>
+                        <h3 class="course-title">Планирование Без Стресса</h3>
+                        <p class="course-desc">Система планирования, которая работает. Без сложных инструментов и выгорания.</p>
+                        <div class="course-meta">
+                            <span class="course-price">3 900 ₽</span>
+                            <a href="#" class="course-btn" onclick="buy('Планирование Без Стресса')">Купить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Курс 6 -->
+                <div class="course-card fade" data-cat="energy">
+                    <div class="course-head">🔋</div>
+                    <div class="course-body">
+                        <span class="course-tag">Экспресс</span>
+                        <h3 class="course-title">Энергия За 15 Минут</h3>
+                        <p class="course-desc">Быстрые техники восстановления энергии в течение дня. Для занятых людей.</p>
+                        <div class="course-meta">
+                            <span class="course-price">1 900 ₽</span>
+                            <a href="#" class="course-btn" onclick="buy('Энергия За 15 Минут')">Купить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta fade">
+                <h3>Не нашли то, что искали?</h3>
+                <p>Напишите нам — подберём индивидуальную программу под ваши задачи.</p>
+                <a href="index.html#contact" class="btn btn-outline">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="f-grid">
+                <div class="f-col">
+                    <div class="logo" style="color:#fff;margin-bottom:15px"><span class="logo-ant">🐜</span> Red Ant</div>
+                    <p>Академия личной эффективности.<br>Строим будущее по кирпичику.</p>
+                </div>
+                <div class="f-col"><h4>Обучение</h4><ul><li><a href="courses.html">Все курсы</a></li><li><a href="#">Для бизнеса</a></li><li><a href="#">Корпоративным</a></li></ul></div>
+                <div class="f-col"><h4>Компания</h4><ul><li><a href="#">О нас</a></li><li><a href="#">Блог</a></li><li><a href="index.html#contact">Контакты</a></li></ul></div>
+                <div class="f-col"><h4>Контакты</h4><ul><li>hello@redant.academy</li><li>+7 (999) 000-00-00</li><li>Москва, ул. Трудолюбия, 1</li></ul></div>
+            </div>
+            <div class="f-bottom">
+                <p>&copy; 2026 Red Ant Academy</p>
+                <div style="display:flex;gap:15px"><a href="#">Конфиденциальность</a><a href="#">Оферта</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Fade on scroll
+const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('show')), {threshold: .1});
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+// Filters
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.onclick = () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.f;
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.style.display = (f === 'all' || card.dataset.cat === f) ? 'block' : 'none';
+        });
+    };
+});
+
+// Buy button
+function buy(course) {
+    alert(`🎉 Вы выбрали: «${course}»\n\nСвяжемся с вами для оформления!`);
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.onclick = e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth'});
+    };
+});
+    </script>
+</body>
+</html>

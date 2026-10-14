@@ -1,0 +1,762 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antи-успех| Игры</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #fff;
+            color: #1A1A1A;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        :root {
+            --red: #E63946;
+            --red-dark: #C92A36;
+            --black: #1A1A1A;
+            --gray: #4A4A4A;
+            --light: #F4F4F4;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid var(--red);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+
+            .btn:hover {
+                background: var(--red-dark);
+                border-color: var(--red-dark);
+                transform: translateY(-2px);
+            }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border-color: var(--black);
+        }
+
+            .btn-outline:hover {
+                background: var(--black);
+                color: #fff;
+            }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .logo-ant {
+            font-size: 2rem;
+            animation: bounce 0.6s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%,100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+            .nav-links a {
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+            }
+
+                .nav-links a:hover {
+                    color: var(--red);
+                }
+
+        .page-header {
+            padding: 140px 0 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+                color: var(--gray);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+        .games-section {
+            padding: 60px 0;
+        }
+
+        /* Переключатель игр */
+        .game-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .game-tab {
+            padding: 15px 35px;
+            border: 2px solid var(--light);
+            border-radius: 50px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .game-tab:hover {
+                border-color: var(--red);
+                transform: translateY(-2px);
+            }
+
+            .game-tab.active {
+                background: var(--red);
+                color: #fff;
+                border-color: var(--red);
+            }
+
+        /* Контейнер игры */
+        .game-container {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            animation: fadeIn 0.4s ease;
+        }
+
+            .game-container.active {
+                display: block;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .game-container h3 {
+            text-align: center;
+            color: var(--red);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+        }
+
+        /* Tic-tac-toe */
+        .ttt-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 280px;
+            margin: 0 auto 25px;
+        }
+
+        .ttt-cell {
+            aspect-ratio: 1;
+            background: var(--light);
+            border: 2px solid var(--red);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .ttt-cell:hover:not(.taken) {
+                background: #ffe5e5;
+            }
+
+            .ttt-cell.taken {
+                cursor: not-allowed;
+            }
+
+            .ttt-cell.x {
+                color: var(--red);
+            }
+
+            .ttt-cell.o {
+                color: var(--black);
+            }
+
+        .ttt-status {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            min-height: 28px;
+            color: var(--red);
+            font-size: 1.1rem;
+        }
+
+        .ttt-actions {
+            text-align: center;
+        }
+
+        /* Minecraft */
+        #mcCanvas {
+            width: 100%;
+            height: 380px;
+            border: 3px solid var(--red);
+            border-radius: 10px;
+            background: #87CEEB;
+            display: block;
+            margin: 0 auto 20px;
+            cursor: crosshair;
+        }
+
+        .mc-status {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .mc-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .mc-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--red);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            background: var(--light);
+            transition: transform 0.2s;
+        }
+
+            .mc-btn:hover {
+                transform: scale(1.1);
+            }
+
+            .mc-btn.active {
+                box-shadow: 0 0 0 3px var(--red);
+                background: #ffe5e5;
+            }
+
+        .mc-info {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+            .mc-info kbd {
+                background: var(--black);
+                color: #fff;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-family: monospace;
+                margin: 0 3px;
+            }
+
+        .game-cta {
+            text-align: center;
+            padding: 60px 0;
+            background: var(--light);
+            margin-top: 50px;
+        }
+
+            .game-cta h3 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .game-cta p {
+                color: var(--gray);
+                margin-bottom: 25px;
+            }
+
+        footer {
+            background: #111;
+            color: #777;
+            padding: 40px 0 25px;
+            font-size: 0.9rem;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .f-col h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .f-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .f-col a:hover {
+            color: var(--red);
+        }
+
+        .f-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.5s;
+        }
+
+            .fade.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .game-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .game-tab {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .game-container {
+                padding: 25px 20px;
+            }
+
+            #mcCanvas {
+                height: 300px;
+            }
+
+            .f-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrap">
+            <a href="index.html" class="logo">
+                <span class="logo-ant">🐜</span>
+                <span>Antи-успех</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html#formula">Метод</a></li>
+                    <li><a href="index.html#directions">Направления</a></li>
+                    <li><a href="courses.html">Курсы</a></li>
+                    <li><a href="games.html">Игры</a></li>
+                    <li><a href="index.html#contact">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="courses.html" class="btn">Каталог</a>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="fade">🎮 Игровая зона</h1>
+            <p class="fade">Отдохните между обучением! Выберите игру для перезагрузки мозга.</p>
+        </div>
+    </section>
+
+    <section class="games-section">
+        <div class="container">
+            <!-- Переключатель игр -->
+            <div class="game-tabs fade">
+                <button class="game-tab active" onclick="switchGame('ttt')">
+                    <span>❌</span> Крестики-нолики
+                </button>
+                <button class="game-tab" onclick="switchGame('mc')">
+                    <span>🧱</span> 2D Minecraft
+                </button>
+            </div>
+
+            <!-- Игра 1: Крестики-нолики -->
+            <div class="game-container active" id="game-ttt">
+                <h3>❌ Крестики-нолики ⭕</h3>
+                <div class="ttt-status" id="tttSt">Ваш ход (Х)</div>
+                <div class="ttt-board" id="ttt">
+                    <div class="ttt-cell" data-i="0"></div>
+                    <div class="ttt-cell" data-i="1"></div>
+                    <div class="ttt-cell" data-i="2"></div>
+                    <div class="ttt-cell" data-i="3"></div>
+                    <div class="ttt-cell" data-i="4"></div>
+                    <div class="ttt-cell" data-i="5"></div>
+                    <div class="ttt-cell" data-i="6"></div>
+                    <div class="ttt-cell" data-i="7"></div>
+                    <div class="ttt-cell" data-i="8"></div>
+                </div>
+                <div class="ttt-actions">
+                    <button class="btn btn-outline" onclick="resetTTT()" style="padding:12px 30px;font-size:0.95rem">🔄 Новая игра</button>
+                </div>
+            </div>
+
+            <!-- Игра 2: Minecraft -->
+            <div class="game-container" id="game-mc">
+                <h3>🧱 2D Minecraft</h3>
+                <div class="mc-status" id="mcSt">⏳ Загрузка...</div>
+                <canvas id="mcCanvas" width="450" height="380"></canvas>
+                <div class="mc-blocks">
+                    <div class="mc-btn active" data-b="1" style="background:#4ade80" title="Трава">🌿</div>
+                    <div class="mc-btn" data-b="2" style="background:#92400e" title="Земля">🟫</div>
+                    <div class="mc-btn" data-b="3" style="background:#6b7280" title="Камень">🪨</div>
+                    <div class="mc-btn" data-b="4" style="background:#a16207" title="Дерево">🪵</div>
+                    <div class="mc-btn" data-b="5" style="background:#16a34a" title="Листва">🍃</div>
+                </div>
+                <div class="mc-info">
+                    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> движение |
+                    <kbd>ЛКМ</kbd> ломать |
+                    <kbd>ПКМ</kbd> ставить |
+                    <kbd>1-5</kbd> блок |
+                    <kbd>R</kbd> новый мир
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="game-cta">
+        <div class="container">
+            <h3 class="fade">Понравились игры?</h3>
+            <p class="fade">Развивайте логику и стратегическое мышление на наших курсах!</p>
+            <a href="courses.html" class="btn fade">Перейти к курсам</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="f-grid">
+                <div class="f-col">
+                    <div class="logo" style="color:#fff;margin-bottom:15px">
+                        <span class="logo-ant">🐜</span> Red Ant
+                    </div>
+                    <p>Академия личной эффективности.<br>Строим будущее по кирпичику.</p>
+                </div>
+                <div class="f-col">
+                    <h4>Обучение</h4>
+                    <ul>
+                        <li><a href="courses.html">Все курсы</a></li>
+                        <li><a href="#">Для бизнеса</a></li>
+                        <li><a href="#">Корпоративным</a></li>
+                    </ul>
+                </div>
+                <div class="f-col">
+                    <h4>Развлечения</h4>
+                    <ul>
+                        <li><a href="games.html">Игры</a></li>
+                        <li><a href="games.html#game-ttt">Крестики-нолики</a></li>
+                        <li><a href="games.html#game-mc">Minecraft</a></li>
+                    </ul>
+                </div>
+                <div class="f-col">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>hello@redant.academy</li>
+                        <li>+7 (999) 000-00-00</li>
+                        <li>Москва, ул. Трудолюбия, 1</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="f-bottom">
+                <p>&copy; 2026 Red Ant Academy</p>
+                <div style="display:flex;gap:15px">
+                    <a href="#">Конфиденциальность</a>
+                    <a href="#">Оферта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fade on scroll
+        const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('show')), { threshold: .1 });
+        document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.onclick = e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth' });
+            };
+        });
+
+        // Переключение игр
+        function switchGame(game) {
+            // Скрываем все игры
+            document.querySelectorAll('.game-container').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+
+            // Показываем выбранную
+            document.getElementById('game-' + game).classList.add('active');
+
+            // Активная кнопка
+            event.currentTarget.classList.add('active');
+
+            // Если переключились на Minecraft - инициализируем если ещё не был
+            if (game === 'mc' && !mcInitialized) {
+                MC.init();
+                mcInitialized = true;
+            }
+        }
+
+        let mcInitialized = false;
+
+        // Tic-tac-toe
+        const TTT = {
+            b: Array(9).fill(''), active: true, me: 'X',
+            wins: [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]],
+            init() { document.querySelectorAll('.ttt-cell').forEach(c => c.onclick = e => this.click(+e.target.dataset.i)); },
+            click(i) { if (this.b[i] || !this.active || this.me !== 'X') return; this.set(i, 'X'); },
+            set(i, p) {
+                this.b[i] = p;
+                const c = document.querySelectorAll('.ttt-cell')[i];
+                c.textContent = p;
+                c.classList.add('taken', p.toLowerCase());
+                if (this.win(p)) { document.getElementById('tttSt').textContent = p === 'X' ? '✅ Вы победили! 🎉' : '❌ Компьютер победил! 🤖'; this.active = false; return; }
+                if (!this.b.includes('')) { document.getElementById('tttSt').textContent = '🤝 Ничья!'; this.active = false; return; }
+                if (p === 'X') { this.me = 'O'; document.getElementById('tttSt').textContent = '⏳ Компьютер думает...'; setTimeout(() => this.ai(), 500); }
+                else { this.me = 'X'; document.getElementById('tttSt').textContent = 'Ваш ход (Х)'; }
+            },
+            ai() { if (!this.active) return; let m = this.find('O') || this.find('X') || (this.b[4] === '' ? 4 : this.b.map((v, i) => v === '' ? i : null).filter(v => v !== null)[0]); if (m !== undefined) this.set(m, 'O'); },
+            find(p) { for (const [a, b, c] of this.wins) { const v = [this.b[a], this.b[b], this.b[c]]; if (v.filter(x => x === p).length === 2 && v.includes('')) return this.b[a] === '' ? a : this.b[b] === '' ? b : c; } return null; },
+            win(p) { return this.wins.some(w => w.every(i => this.b[i] === p)); }
+        };
+
+        function resetTTT() {
+            TTT.b = Array(9).fill('');
+            TTT.active = true;
+            TTT.me = 'X';
+            document.getElementById('tttSt').textContent = 'Ваш ход (Х)';
+            document.querySelectorAll('.ttt-cell').forEach(c => {
+                c.textContent = '';
+                c.classList.remove('taken', 'x', 'o');
+            });
+        }
+
+        TTT.init();
+
+        // Minecraft
+        const MC = {
+            cv: null, ctx: null, BS: 30, W: 25, H: 15,
+            world: [], pl: { x: 300, y: 100, w: 24, h: 48, vx: 0, vy: 0, g: false },
+            cam: { x: 0, y: 0 }, keys: {}, ms: { x: 0, y: 0, L: false, R: false },
+            sel: 1, run: false, col: { 0: null, 1: '#4ade80', 2: '#92400e', 3: '#6b7280', 4: '#a16207', 5: '#16a34a' },
+            init() {
+                this.cv = document.getElementById('mcCanvas');
+                if (!this.cv) { document.getElementById('mcSt').textContent = '❌ Ошибка загрузки'; return; }
+                this.ctx = this.cv.getContext('2d');
+                this.gen();
+                this.run = true;
+                document.getElementById('mcSt').textContent = '✅ Игра запущена! Удачи!';
+                this.loop();
+                this.ctrl();
+            },
+            gen() {
+                this.world = [];
+                for (let x = 0; x < this.W; x++) {
+                    this.world[x] = [];
+                    const g = 8 + Math.floor(Math.sin(x / 2) * 2);
+                    for (let y = 0; y < this.H; y++) this.world[x][y] = y < g - 2 ? 0 : y === g - 2 ? 1 : y < g + 2 ? 2 : 3;
+                }
+                this.pl.x = this.W * this.BS / 2;
+                this.pl.y = 60;
+                this.pl.vx = this.pl.vy = 0;
+            },
+            upd() {
+                if (!this.run) return;
+                if (this.keys['KeyA'] || this.keys['ArrowLeft']) this.pl.vx = -4;
+                else if (this.keys['KeyD'] || this.keys['ArrowRight']) this.pl.vx = 4;
+                else this.pl.vx = 0;
+                if ((this.keys['KeyW'] || this.keys['ArrowUp'] || this.keys['Space']) && this.pl.g) { this.pl.vy = -10; this.pl.g = false }
+                this.pl.vy += 0.4;
+                this.pl.x += this.pl.vx;
+                this.pl.y += this.pl.vy;
+                const px = Math.floor(this.pl.x / this.BS), py = Math.floor((this.pl.y + this.pl.h) / this.BS);
+                if (py >= 0 && py < this.H && px >= 0 && px < this.W && this.world[px][py] !== 0) { this.pl.y = py * this.BS - this.pl.h; this.pl.vy = 0; this.pl.g = true }
+                if (this.pl.y > this.H * this.BS) { this.pl.y = 60; this.pl.vy = 0 }
+                this.cam.x = this.pl.x - this.cv.width / 2;
+                this.cam.y = this.pl.y - this.cv.height / 2;
+                this.cam.x = Math.max(0, Math.min(this.cam.x, this.W * this.BS - this.cv.width));
+                this.cam.y = Math.max(-50, Math.min(this.cam.y, this.H * this.BS - this.cv.height));
+                const mx = this.ms.x + this.cam.x, my = this.ms.y + this.cam.y, bx = Math.floor(mx / this.BS), by = Math.floor(my / this.BS);
+                if (bx >= 0 && bx < this.W && by >= 0 && by < this.H) {
+                    const d = Math.hypot(bx - Math.floor(this.pl.x / this.BS), by - Math.floor(this.pl.y / this.BS));
+                    if (d < 4) {
+                        if (this.ms.L) this.world[bx][by] = 0;
+                        if (this.ms.R && this.world[bx][by] === 0) this.world[bx][by] = this.sel
+                    }
+                }
+            },
+            draw() {
+                if (!this.ctx) return;
+                this.ctx.fillStyle = '#87CEEB';
+                this.ctx.fillRect(0, 0, this.cv.width, this.cv.height);
+                const sc = Math.floor(this.cam.x / this.BS), ec = sc + Math.ceil(this.cv.width / this.BS) + 2,
+                    sr = Math.floor(this.cam.y / this.BS), er = sr + Math.ceil(this.cv.height / this.BS) + 2;
+                for (let x = sc; x <= ec; x++)for (let y = sr; y <= er; y++)if (x >= 0 && x < this.W && y >= 0 && y < this.H && this.world[x][y] !== 0) {
+                    this.ctx.fillStyle = this.col[this.world[x][y]];
+                    this.ctx.fillRect(Math.floor(x * this.BS - this.cam.x), Math.floor(y * this.BS - this.cam.y), this.BS, this.BS);
+                    this.ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+                    this.ctx.strokeRect(Math.floor(x * this.BS - this.cam.x), Math.floor(y * this.BS - this.cam.y), this.BS, this.BS);
+                }
+                this.ctx.fillStyle = '#E63946';
+                this.ctx.fillRect(Math.floor(this.pl.x - this.cam.x), Math.floor(this.pl.y - this.cam.y), this.pl.w, this.pl.h);
+                this.ctx.fillStyle = '#fff';
+                this.ctx.fillRect(Math.floor(this.pl.x - this.cam.x + 4), Math.floor(this.pl.y - this.cam.y + 8), 6, 6);
+                this.ctx.fillRect(Math.floor(this.pl.x - this.cam.x + 14), Math.floor(this.pl.y - this.cam.y + 8), 6, 6);
+                this.ctx.fillStyle = '#000';
+                this.ctx.fillRect(Math.floor(this.pl.x - this.cam.x + 6), Math.floor(this.pl.y - this.cam.y + 10), 3, 3);
+                this.ctx.fillRect(Math.floor(this.pl.x - this.cam.x + 16), Math.floor(this.pl.y - this.cam.y + 10), 3, 3);
+                const mx = this.ms.x + this.cam.x, my = this.ms.y + this.cam.y, bx = Math.floor(mx / this.BS), by = Math.floor(my / this.BS);
+                if (bx >= 0 && bx < this.W && by >= 0 && by < this.H) {
+                    this.ctx.strokeStyle = '#fff';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.strokeRect(Math.floor(bx * this.BS - this.cam.x), Math.floor(by * this.BS - this.cam.y), this.BS, this.BS);
+                }
+            },
+            loop() { this.upd(); this.draw(); requestAnimationFrame(() => this.loop()); },
+            ctrl() {
+                document.onkeydown = e => {
+                    this.keys[e.code] = true;
+                    if (e.key >= '1' && e.key <= '5') {
+                        this.sel = +e.key;
+                        document.querySelectorAll('.mc-btn').forEach(b => b.classList.toggle('active', +b.dataset.b === this.sel))
+                    }
+                    if (e.key.toLowerCase() === 'r') this.gen();
+                };
+                document.onkeyup = e => this.keys[e.code] = false;
+                this.cv.onmousemove = e => { const r = this.cv.getBoundingClientRect(); this.ms.x = e.clientX - r.left; this.ms.y = e.clientY - r.top };
+                this.cv.onmousedown = e => { e.preventDefault(); if (e.button === 0) this.ms.L = true; if (e.button === 2) this.ms.R = true };
+                this.cv.onmouseup = e => { if (e.button === 0) this.ms.L = false; if (e.button === 2) this.ms.R = false };
+                this.cv.oncontextmenu = e => e.preventDefault();
+                document.querySelectorAll('.mc-btn').forEach(btn => btn.onclick = () => {
+                    this.sel = +btn.dataset.b;
+                    document.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            }
+        };
+
+        // Инициализация при загрузке страницы
+        window.onload = () => {
+            // Крестики-нолики уже инициализированы выше
+            // Minecraft инициализируется только при переключении на него
+        };
+    </script>
+</body>
+</html>
